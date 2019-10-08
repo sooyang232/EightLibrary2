@@ -9,7 +9,6 @@
     <init-param>
         <param-name>propertyConfig</param-name>
         <param-value>C:/webtest/4.jsp/sou/EightLibrary2/WebContent/WEB-INF/commandPro.properties</param-value>
-        <!-- <param-value>E:/webtest/4.jsp/sou/EightLibrary_test/WebContent/WEB-INF/commandPro.properties</param-value> -->
     </init-param>
   </servlet>
   

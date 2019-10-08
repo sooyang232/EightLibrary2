@@ -45,7 +45,7 @@
 						<a href="search.html">자료검색</a>
 						<ul class="sub-menu">
 							<li><a href="search.html">통합검색</a></li>
-                               <li><a href="newarrivalbook.html">신착도서</a></li>
+                               <li><a href="newbook.do">신착도서</a></li>
 						</ul>
 					</li>
 					<li>
