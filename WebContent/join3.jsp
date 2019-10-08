@@ -59,7 +59,7 @@
 	                        <p class="join-t1">회원가입이 완료되었습니다.</p>
 	                        <p class="join-t2">※ 관리자 승인 후 로그인이 가능합니다.</p>
 	                        <div class="btn-area tac">
-	                            <a href="index.html" class="btn lg deep-blue">메인으로 이동</a>
+	                            <a href="index.do" class="btn lg deep-blue">메인으로 이동</a>
 	                        </div>
 	                    </div>
                     </c:when>

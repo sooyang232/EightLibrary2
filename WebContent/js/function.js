@@ -594,7 +594,7 @@ function idCheck(id){
 		  form.userID.focus();
 	}else{
 		url="idCheck.jsp?userID="+id;
-		window.open(url,"post","width=300,height=150");
+		window.open(url,"post","width=300,height=150,left=800,top=400");
 	}
 }
 
