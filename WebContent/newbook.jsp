@@ -79,14 +79,14 @@
                         <li class="result-item">
                             <div class="check-item">
                                 <input type="checkbox" id="check93154380" value="93154380">
-                                <label for="solars-check93154380">엔터프라이즈 자바 마이크로서비스 : JVM 기반 대규모 애플리케이션을 마이크로서비스로 설계, 구축, 관리하는 기술</label>
+                                <label for="solars-check93154380">${book.bookName}</label>
                             </div>
                             <div class="thumbnail" isbn="9788960881570">
                                 <div class="image"><img src="${book.bookImage}" alt="표지"></div>
                             </div>
                             <div class="summary">
                                 <dl class="book-data">
-                                    <dt class="title"><a href="searchView.html">${book.bookName}</a></dt>
+                                    <dt class="title"><a href="newbookView.do?id=${book.bookID}">${book.bookName}</a></dt>
                                     <dd>저자: ${book.bookWriter} | 출판사: ${book.bookPublisher} | 
                                     발행일자: <fmt:formatDate value="${book.bookDate}" pattern="yyyy-MM-dd" /></dd>
                                     <dd>ISBN: ${book.isbn} | 등록번호: ${book.bookID}</dd>

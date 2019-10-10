@@ -83,4 +83,39 @@ public class BookDAO {
 		return bookList;
 	}
 	
+	// 글상세 보기
+		public BookDTO getBook(String id) {
+
+			BookDTO book= null;
+			try {
+				con = pool.getConnection();
+
+				sql = "select * from book where bookID=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				
+				// 글목록보기
+				if (rs.next()) {// 레코드가 최소 만족 1개이상 존재한다면
+					book = new BookDTO();
+					
+					book.setBookID(rs.getString("bookID"));
+					book.setBookName(rs.getString("bookName"));
+					book.setBookWriter(rs.getString("bookWriter"));
+					book.setBookContent(rs.getString("bookContent"));
+					book.setBookPublisher(rs.getString("bookPublisher"));
+					book.setBookDate(rs.getTimestamp("bookDate"));
+					book.setIsbn(rs.getString("isbn"));
+					book.setBookImage(rs.getString("bookImage"));
+					book.setBookCheck(rs.getString("bookCheck"));
+
+				}
+			} catch (Exception e) {
+				System.out.println("getBook() 메서드 에러유발" + e);
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return book;
+		}
+		
 }
