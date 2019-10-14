@@ -50,6 +50,9 @@
                 <!-- <div class="summary-area">
                     <p class="total-text">전체 : '<strong>자바</strong>' 에 대한 검색결과입니다. (총 <em>666</em> 건)</p>
                 </div> -->
+                <div class="summary-area">
+                    <p class="total-text">(총 <em>${pgList.count }</em> 건)</p>
+                </div>
                 <div class="list-area">
                     <div class="utility-bar">
                         <div class="left">
@@ -75,6 +78,7 @@
                         </div>
                     </div>
                     <ul class="result-list">
+                    
                     <c:forEach var="book" items="${bookList}">
                         <li class="result-item">
                             <div class="check-item">
@@ -86,9 +90,9 @@
                             </div>
                             <div class="summary">
                                 <dl class="book-data">
-                                    <dt class="title"><a href="newbookView.do?id=${book.bookID}">${book.bookName}</a></dt>
+                                    <dt class="title"><a href="newbookView.do?id=${book.bookID}&pageNum=${pgList.currentPage}">${book.bookName}</a></dt>
                                     <dd>저자: ${book.bookWriter} | 출판사: ${book.bookPublisher} | 
-                                    발행일자: <fmt:formatDate value="${book.bookDate}" pattern="yyyy-MM-dd" /></dd>
+                                    발행일자: <fmt:formatDate value="${book.bookDate}" pattern="yyyy-MM-dd" /> |</dd>
                                     <dd>ISBN: ${book.isbn} | 등록번호: ${book.bookID}</dd>
                                     <dd class="book-status">
                                         <div class="left">
@@ -108,14 +112,26 @@
                         </li>
                      </c:forEach>   
                     </ul>
+                    
+                    <!-- 페이징 처리 -->
                     <div class="pagination tac">
-                        <a href="#" class="page-btn prev">이전</a>
-                        <a href="#" class="page-num current">1</a>
-                        <a href="#" class="page-num">2</a>
-                        <a href="#" class="page-num">3</a>
-                        <a href="#" class="page-num">4</a>
-                        <a href="#" class="page-num">5</a>
-                        <a href="#" class="page-btn next">다음</a>
+                    	<c:if test="${pgList.startPage > pgList.blockSize}">
+                        	<a href="newbook.do?pageNum=${pgList.startPage-pgList.blockSize}" class="page-btn prev">이전</a>
+                        </c:if>
+                        
+                        <c:forEach var="i" begin="${pgList.startPage}" end="${pgList.endPage}">
+                        	<c:if test="${pgList.currentPage==i}">
+                        		<a href="newbook.do?pageNum=${i}" class="page-num current">${i}</a>
+                        	</c:if>
+                        	<c:if test="${pgList.currentPage!=i}">
+                        		<a href="newbook.do?pageNum=${i}" class="page-num">${i}</a>
+                        	</c:if>
+                        </c:forEach>
+                        
+                        <c:if test="${pgList.endPage < pgList.pageCount}">
+                        	<a href="newbook.do?pageNum=${pgList.startPage+pgList.blockSize}" class="page-btn next">다음</a>
+                        </c:if>
+                        
                     </div>
                 </div>
 			</div>

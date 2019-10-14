@@ -1,6 +1,7 @@
 package action;
 
 import java.util.Collections;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,9 @@ public class NewBookAction implements CommandAction {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		// TODO Auto-generated method stub
 		
+		String pageNum=request.getParameter("pageNum");
+		System.out.println("pageNum="+pageNum);
+		
 		int count=0;//총레코드수
 		List bookList=null;//화면에 출력할 레코드를 저장할 변수
 		
@@ -22,14 +26,18 @@ public class NewBookAction implements CommandAction {
 		count=bookdao.getBookCount();
 		System.out.println("현재 검색된 레코드수(count)=>"+count);
 		
+		Hashtable<String,Integer> pgList=bookdao.pageList(pageNum, count);
+		
 		if(count>0) {
-			bookList=bookdao.getBooks(1, count);
+			//bookList=bookdao.getBooks(1, count);
+			bookList=bookdao.getBooks(pgList.get("startRow"),pgList.get("pageSize"));
 		}else {
 			bookList=Collections.EMPTY_LIST;
 		}
 		
 		//처리한 결과를 공유(서버메모리에 저장)->이동할 페이지에 공유해서 사용(request객체)
 		request.setAttribute("bookList", bookList);//${bookList}
+		request.setAttribute("pgList", pgList);//페이징처리 10개 정보
 		
 		return "/newbook.jsp";
 	}

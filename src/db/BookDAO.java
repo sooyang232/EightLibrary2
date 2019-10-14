@@ -2,6 +2,7 @@ package db;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 public class BookDAO {
@@ -116,6 +117,61 @@ public class BookDAO {
 				pool.freeConnection(con, pstmt, rs);
 			}
 			return book;
+		}
+		
+		//페이징 처리계산 정리해주는 메서드
+		//1)화면에 보여주는 페이지번호 2) 화면에 출력할 레코드 개수
+		public Hashtable pageList(String pageNum,int count) {
+			
+			//1.페이징 처리 결과를 저장할 hashtable 객체를 선언
+			Hashtable<String,Integer> pgList = new Hashtable<String,Integer>();
+			//복잡한 페이징처리를 대신 처리
+		     int pageSize=5;//numPerPage->페이지당 보여주는 게시물수(=레코드수) 
+		     int blockSize=3;//pagePerBlock->블럭당 보여주는 페이지수 
+		     
+		    //게시판을 맨 처음 실행시키면 무조건 1페이지부터 출력
+		    if(pageNum==null){
+		    	pageNum="1";//default(무조건 1페이지는 선택하지 않아도 보여줘야 하기때문에),가장 최근의 글
+		    }
+		    int currentPage=Integer.parseInt(pageNum);//"1"->1 현재페이지(=nowPage)
+		    //메서드 호출->시작 레코드번호
+		    //                  (1-1)*10+1=1,(2-1)*10+1=11,(3-1)*10+1=21)
+		    int startRow=(currentPage-1)*pageSize+1; //시작 레코드 번호
+		    int endRow=currentPage*pageSize;//1*10=10,2*10=20,3*10=30 ->마지막 레코드번호 	
+		    int number=0;//beginPerPage->페이지별로 시작하는 맨 처음에 나오는 게시물번호
+		    System.out.println("현재 레코드수(count)=>"+count);
+		    //			122-(1-1)*10=122,122-(2-1)*10
+		    number=count-(currentPage-1)*pageSize;
+		    System.out.println("페이지별 number=>"+number);
+		    //총페이지수,시작,종료페이지 계산
+		    //					122/10=12.2+1=>12.2+1.0=13.2=13페이지
+		    int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		    //모델1 jsp 소스
+		  //블럭당 페이지수 계산 -> 10 -> 10의 배수,3 ->3배수
+		  		int startPage=0;
+		  		if(currentPage%blockSize!=0){//10의배수가 아니라면
+		  			startPage=currentPage/blockSize*blockSize+1;
+		  		}else{	//10%10=0,(10,20,30)
+		  				//			((10/10)-1)*10+1
+		  			startPage=((currentPage/blockSize)-1)*blockSize+1;
+		  		}
+		  		int endPage=startPage+blockSize-1;		//1+10-1=10
+		  		System.out.println("startPage="+startPage+",endPage="+endPage);
+		  		if(endPage > pageCount)
+		  			endPage=pageCount;//마지막 페이지 = 총페이지수
+		  		//페이징처리에 대한 계산결과 -> Hashtable,HashMap 
+		  		pgList.put("pageSize", pageSize);
+		  		pgList.put("blockSize", blockSize);
+		  		pgList.put("currentPage", currentPage);
+		  		pgList.put("startRow", startRow);
+		  		pgList.put("endRow", endRow);
+		  		pgList.put("count", count);
+		  		pgList.put("number", number);
+		  		pgList.put("startPage", startPage);
+		  		pgList.put("endPage", endPage);
+		  		pgList.put("pageCount", pageCount);
+		  		
+		  		return pgList;
 		}
 		
 }
