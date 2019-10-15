@@ -1,2 +1,2 @@
 # EightLibrary2
-team project
+진행중인 팀 
