@@ -42,6 +42,39 @@ public class BookDAO {
 		return x;
 	}
 	
+	// 게시판의 레코드수를 검색어에 따른 메서드작성(검색분야,검색어)
+	public int getBookSearchCount(String search, String searchtext) { // getMemberCount()
+		int x = 0;// 총 레코드갯수를 저장
+
+		try {
+			con = pool.getConnection();// 커넥션풀에서 한개 빌려오는작업
+			System.out.println("con=>" + con);// 디버깅코드
+			// ---------------------------------------------------------------
+			if (search == null || search == "") { // 검색분야 선택X
+				sql = "select count(*) from book";
+			} else { // 검색분야
+				if (search.equals("all")) { // 서명+저자+출판사
+					sql = "select count(*) from book where bookName like '%" + searchtext + "%' or bookWriter like '%"
+							+ searchtext + "%' or bookPublisher like '%" +searchtext+"%'";
+				} else { // 서명,저자,출판사 -> 매개변수를 이용해서 하나의 sql통합
+					sql = "select count(*) from book where " + search + " like '%" + searchtext + "%'";
+				}
+			}
+			System.out.println("getBookSearchCount 검색sql=>" + sql);
+			// ---------------------------------------------------------------
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {// 보여주는 결과가 있다면
+				x = rs.getInt(1); // 변수명=rs.get자료형(필드명 또는 인덱스번호)=>필드명X을 사용할 수 없는 경우에 사용
+			}
+		} catch (Exception e) {
+			System.out.println("getBookSearchCount() 메서드 에러유발" + e);
+		} finally {
+			pool.freeConnection(con, pstmt, rs);// 연결객체 및 다른 객체 반납
+		}
+		return x;
+	}
+		
 	public List getBooks(int start, int end) {
 
 		List bookList = null;
@@ -84,6 +117,58 @@ public class BookDAO {
 		return bookList;
 	}
 	
+	// 검색어에 따른 레코드의 범위지정에 대한 메서드
+	public List getSearchBooks(int start, int end, String search, String searchtext) {
+
+		List bookList = null;
+
+		try {
+			con = pool.getConnection();
+			// --------------------------------------------------------------------------
+			if (search == null | search == "") {
+				sql = "select * from book order by bookID desc limit ?,?";// 1,10
+			} else { 
+				if (search.equals("all")) { 
+					sql = "select * from book where bookName like '%" + searchtext + "%' or bookWriter like '%"
+							+ searchtext + "%'or bookPublisher like '%" + searchtext 
+							+ "%' order by bookID desc limit ?,?";
+				} else { 
+					sql = "select * from book where " + search + " like '%" + searchtext
+							+ "%' order by bookID desc limit ?,?";
+				}
+			}
+			System.out.println("getSearchBooks()의 sql=>" + sql);
+			// --------------------------------------------------------------------------
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, start - 1);// mysql은 레코드순번이 내부적으로 0부터 시작
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+			// 글목록보기
+			if (rs.next()) {// 레코드가 최소 만족 1개이상 존재한다면
+				bookList = new ArrayList(end);// 10=>end갯수만큼 데이터를 담을 공간을 생성하라
+				do {
+					BookDTO book = new BookDTO();
+					book.setBookID(rs.getString("bookID"));
+					book.setBookName(rs.getString("bookName"));
+					book.setBookWriter(rs.getString("bookWriter"));
+					book.setBookContent(rs.getString("bookContent"));
+					book.setBookPublisher(rs.getString("bookPublisher"));
+					book.setBookDate(rs.getTimestamp("bookDate"));
+					book.setIsbn(rs.getString("isbn"));
+					book.setBookImage(rs.getString("bookImage"));
+					book.setBookCheck(rs.getString("bookCheck"));
+					// 추가
+					bookList.add(book);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			System.out.println("getSearchBooks() 메서드 에러유발" + e);
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return bookList;
+	}
+		
 	// 글상세 보기
 		public BookDTO getBook(String id) {
 
@@ -127,7 +212,7 @@ public class BookDAO {
 			Hashtable<String,Integer> pgList = new Hashtable<String,Integer>();
 			//복잡한 페이징처리를 대신 처리
 		     int pageSize=5;//numPerPage->페이지당 보여주는 게시물수(=레코드수) 
-		     int blockSize=3;//pagePerBlock->블럭당 보여주는 페이지수 
+		     int blockSize=5;//pagePerBlock->블럭당 보여주는 페이지수 
 		     
 		    //게시판을 맨 처음 실행시키면 무조건 1페이지부터 출력
 		    if(pageNum==null){

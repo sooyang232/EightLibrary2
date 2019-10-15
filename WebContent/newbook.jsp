@@ -33,26 +33,24 @@
                     <h2 class="page-title">신착도서</h2>
                 </div>
                 <div class="search-box tac">
-                    <form method="post" action="" id="searchForm">
+                    <form method="post" action="newbook.do" id="searchForm">
                         <div class="input-box">
-                            <select name="searchKey" title="검색 선택" id="searchKey" class="select">
+                            <select name="search" id="search" class="select">
                                 <option value="all" selected>전체</option>
-                                <option value="title">서명</option>
-                                <option value="author">저자</option>
-                                <option value="publisher">출판사</option>
-                                <option value="keyword">키워드</option>
+                                <option value="bookName">서명</option>
+                                <option value="bookWriter">저자</option>
+                                <option value="bookPublisher">출판사</option>
                             </select>
-                            <input type="text" name="searchKeyword" title="검색어 입력" id="searchKeyword" class="form">
-                            <input type="submit" value="검 색" title="검색" class="btn primary md">
+                            <input type="text" name="searchtext" id="searchtext" class="form">
+                            <input type="submit" value="검 색" class="btn primary md">
                         </div>
                     </form>
                 </div>
-                <!-- <div class="summary-area">
-                    <p class="total-text">전체 : '<strong>자바</strong>' 에 대한 검색결과입니다. (총 <em>666</em> 건)</p>
-                </div> -->
+                
                 <div class="summary-area">
-                    <p class="total-text">(총 <em>${pgList.count }</em> 건)</p>
+                    <p class="total-text">전체 : ' <strong>${searchtext}</strong> ' 에 대한 검색결과입니다. (총 <em>${pgList.count }</em> 건)</p>
                 </div>
+               
                 <div class="list-area">
                     <div class="utility-bar">
                         <div class="left">
@@ -116,20 +114,20 @@
                     <!-- 페이징 처리 -->
                     <div class="pagination tac">
                     	<c:if test="${pgList.startPage > pgList.blockSize}">
-                        	<a href="newbook.do?pageNum=${pgList.startPage-pgList.blockSize}" class="page-btn prev">이전</a>
+                        	<a href="newbook.do?pageNum=${pgList.startPage-pgList.blockSize}&search=${search}&searchtext=${searchtext}" class="page-btn prev">이전</a>
                         </c:if>
                         
                         <c:forEach var="i" begin="${pgList.startPage}" end="${pgList.endPage}">
                         	<c:if test="${pgList.currentPage==i}">
-                        		<a href="newbook.do?pageNum=${i}" class="page-num current">${i}</a>
+                        		<a href="newbook.do?pageNum=${i}&search=${search}&searchtext=${searchtext}" class="page-num current">${i}</a>
                         	</c:if>
                         	<c:if test="${pgList.currentPage!=i}">
-                        		<a href="newbook.do?pageNum=${i}" class="page-num">${i}</a>
+                        		<a href="newbook.do?pageNum=${i}&search=${search}&searchtext=${searchtext}" class="page-num">${i}</a>
                         	</c:if>
                         </c:forEach>
                         
                         <c:if test="${pgList.endPage < pgList.pageCount}">
-                        	<a href="newbook.do?pageNum=${pgList.startPage+pgList.blockSize}" class="page-btn next">다음</a>
+                        	<a href="newbook.do?pageNum=${pgList.startPage+pgList.blockSize}&search=${search}&searchtext=${searchtext}" class="page-btn next">다음</a>
                         </c:if>
                         
                     </div>
