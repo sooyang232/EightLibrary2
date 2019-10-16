@@ -42,9 +42,9 @@
 				<h2 class="hide">주메뉴</h2>
 				<ul class="main-nav-list">
 					<li>
-						<a href="search.html">자료검색</a>
+						<a href="search.do">자료검색</a>
 						<ul class="sub-menu">
-							<li><a href="search.html">통합검색</a></li>
+							<li><a href="search.do">통합검색</a></li>
                                <li><a href="newbook.do">신착도서</a></li>
 						</ul>
 					</li>

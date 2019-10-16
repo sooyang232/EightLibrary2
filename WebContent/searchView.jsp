@@ -29,7 +29,7 @@
                             <li><a href="search.html">자료검색</a></li>
                         </ul>
                     </div>
-                    <h2 class="page-title">신착도서</h2>
+                    <h2 class="page-title">통합검색</h2>
                 </div>
                 <div class="result-detail">
                     <div class="detail-thumbnail">
@@ -54,7 +54,7 @@
                 <div class="btn-area tac">
                     <button type="button" class="btn deep-blue">관심도서담기</button>
                     <a href="basketlist.html" class="btn blue-gray">관심도서목록</a>
-                    <!-- <a href="newbook.do" class="btn gray">목록</a> -->
+                    <!-- <a href="search.do" class="btn gray">목록</a> -->
                     <a href="javascript:history.back();" class="btn gray">목록</a>
                 </div>
                 <div class="add-section">

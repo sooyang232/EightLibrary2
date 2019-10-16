@@ -42,7 +42,7 @@ public class BookDAO {
 		return x;
 	}
 	
-	// 게시판의 레코드수를 검색어에 따른 메서드작성(검색분야,검색어)
+	// newbook : 게시판의 레코드수를 검색어에 따른 메서드작성(검색분야,검색어)
 	public int getBookSearchCount(String search, String searchtext) { // getMemberCount()
 		int x = 0;// 총 레코드갯수를 저장
 
@@ -74,6 +74,39 @@ public class BookDAO {
 		}
 		return x;
 	}
+	
+	// search : 게시판의 레코드수를 검색어에 따른 메서드작성(검색분야,검색어)
+		public int getSearchCount(String search, String searchtext) { // getMemberCount()
+			int x = 0;// 총 레코드갯수를 저장
+
+			try {
+				con = pool.getConnection();// 커넥션풀에서 한개 빌려오는작업
+				System.out.println("con=>" + con);// 디버깅코드
+				// ---------------------------------------------------------------
+				if (search == null || search == "") { // 검색분야 선택X
+					//sql = "select count(*) from book";
+				} else { // 검색분야
+					if (search.equals("all")) { // 서명+저자+출판사
+						sql = "select count(*) from book where bookName like '%" + searchtext + "%' or bookWriter like '%"
+								+ searchtext + "%' or bookPublisher like '%" +searchtext+"%'";
+					} else { // 서명,저자,출판사 -> 매개변수를 이용해서 하나의 sql통합
+						sql = "select count(*) from book where " + search + " like '%" + searchtext + "%'";
+					}
+				}
+				System.out.println("getBookSearchCount 검색sql=>" + sql);
+				// ---------------------------------------------------------------
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {// 보여주는 결과가 있다면
+					x = rs.getInt(1); // 변수명=rs.get자료형(필드명 또는 인덱스번호)=>필드명X을 사용할 수 없는 경우에 사용
+				}
+			} catch (Exception e) {
+				System.out.println("getBookSearchCount() 메서드 에러유발" + e);
+			} finally {
+				pool.freeConnection(con, pstmt, rs);// 연결객체 및 다른 객체 반납
+			}
+			return x;
+		}
 		
 	public List getBooks(int start, int end) {
 

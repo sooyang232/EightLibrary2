@@ -15,12 +15,11 @@
 	<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
 	<link rel="stylesheet" type="text/css" href="css/common.css">
 	<link rel="stylesheet" type="text/css" href="css/sub.css">
-	
 </head>
 <body>
-<c:import url="header.jsp"/>
+	<c:import url="header.jsp"/>
 
-<div id="content" class="site-content">
+	<div id="content" class="site-content">
 		<div class="inner-max">
 			<div class="content-area">
                 <div class="page-header">
@@ -30,10 +29,10 @@
                             <li><a href="search.html">자료검색</a></li>
                         </ul>
                     </div>
-                    <h2 class="page-title">신착도서</h2>
+                    <h2 class="page-title">통합검색</h2>
                 </div>
                 <div class="search-box tac">
-                    <form method="post" action="newbook.do" id="searchForm">
+                    <form method="post" action="search.do" id="searchForm">
                         <div class="input-box">
                             <select name="search" id="search" class="select">
                                 <option value="all" selected>전체</option>
@@ -50,7 +49,7 @@
                 <div class="summary-area">
                     <p class="total-text">전체 : ' <strong>${searchtext}</strong> ' 에 대한 검색결과입니다. (총 <em>${pgList.count }</em> 건)</p>
                 </div>
-               
+                
                 <div class="list-area">
                     <div class="utility-bar">
                         <div class="left">
@@ -76,6 +75,9 @@
                         </div>
                     </div>
                     
+                    <c:if test="${pgList.count==0}">
+                    </c:if>
+                    <c:if test="${pgList.count!=0}">
                     <ul class="result-list">
                     <c:forEach var="book" items="${bookList}">
                         <li class="result-item">
@@ -88,7 +90,7 @@
                             </div>
                             <div class="summary">
                                 <dl class="book-data">
-                                    <dt class="title"><a href="newbookView.do?id=${book.bookID}&pageNum=${pgList.currentPage}">${book.bookName}</a></dt>
+                                    <dt class="title"><a href="searchView.do?id=${book.bookID}&pageNum=${pgList.currentPage}">${book.bookName}</a></dt>
                                     <dd>저자: ${book.bookWriter} | 출판사: ${book.bookPublisher} | 
                                     발행일자: <fmt:formatDate value="${book.bookDate}" pattern="yyyy-MM-dd" /> |</dd>
                                     <dd>ISBN: ${book.isbn} | 등록번호: ${book.bookID}</dd>
@@ -110,32 +112,33 @@
                         </li>
                      </c:forEach>   
                     </ul>
-                    
+                    </c:if>
                     <!-- 페이징 처리 -->
                     <div class="pagination tac">
                     	<c:if test="${pgList.startPage > pgList.blockSize}">
-                        	<a href="newbook.do?pageNum=${pgList.startPage-pgList.blockSize}&search=${search}&searchtext=${searchtext}" class="page-btn prev">이전</a>
+                        	<a href="search.do?pageNum=${pgList.startPage-pgList.blockSize}&search=${search}&searchtext=${searchtext}" class="page-btn prev">이전</a>
                         </c:if>
                         
                         <c:forEach var="i" begin="${pgList.startPage}" end="${pgList.endPage}">
                         	<c:if test="${pgList.currentPage==i}">
-                        		<a href="newbook.do?pageNum=${i}&search=${search}&searchtext=${searchtext}" class="page-num current">${i}</a>
+                        		<a href="search.do?pageNum=${i}&search=${search}&searchtext=${searchtext}" class="page-num current">${i}</a>
                         	</c:if>
                         	<c:if test="${pgList.currentPage!=i}">
-                        		<a href="newbook.do?pageNum=${i}&search=${search}&searchtext=${searchtext}" class="page-num">${i}</a>
+                        		<a href="search.do?pageNum=${i}&search=${search}&searchtext=${searchtext}" class="page-num">${i}</a>
                         	</c:if>
                         </c:forEach>
                         
                         <c:if test="${pgList.endPage < pgList.pageCount}">
-                        	<a href="newbook.do?pageNum=${pgList.startPage+pgList.blockSize}&search=${search}&searchtext=${searchtext}" class="page-btn next">다음</a>
+                        	<a href="search.do?pageNum=${pgList.startPage+pgList.blockSize}&search=${search}&searchtext=${searchtext}" class="page-btn next">다음</a>
                         </c:if>
                         
                     </div>
+                    
                 </div>
 			</div>
 		</div>
 	</div>
-	
+
 	<c:import url="footer.jsp"/>
 </body>
 </html>
