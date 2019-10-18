@@ -38,13 +38,13 @@
                <div class="board-search-box tar">
                    <form method="post" action="" id="searchForm">
                        <div class="input-box">
-                           <select name="searchKey" title="검색 선택" id="searchKey" class="select">
-                               <option value="all" selected>전체</option>
-                               <option value="title">제목</option>
-                               <option value="content">내용</option>
-                               <option value="writer"">작성자</option>
-                           </select>
-                           <input type="text" name="searchKeyword" title="검색어 입력" id="searchKeyword" class="form">
+                           <select name="search" title="검색 선택" id="search" class="select">
+                                <option value="all" selected>전체</option>
+                                <option value="b4_title">제목</option>
+                                <option value="b4_content">내용</option>
+                                <option value="adminID"">작성자</option>
+                            </select>
+                            <input type="text" name="searchtext" title="검색어 입력" id="searchtext" class="form">
                            <input type="submit" value="검색" title="검색" class="btn primary md">
                        </div>
                    </form>

@@ -146,9 +146,9 @@ public List getArticles(int start,int end) {
 			if(search==null || search=="") { // 검색분야 선택X
 				sql="select count(*) from b4"; //select count(*) from member;
 			}else {	//검색분야(제목,작성자,제목+본문)
-				if(search.equals("subject_content")) {	//제목+본문
-					sql="select count(*) from b4 where subject like '%"+
-				searchtext+"%' or content like '%"+searchtext+"%'";
+				if(search.equals("all")) {	//제목+본문
+					sql="select count(*) from b4 where b4_title like '%"+
+				searchtext+"%' or b4_content like '%"+searchtext+"%' or adminID like '%"+searchtext+"%'";
 				}else {	//제목,작성자 -> 매개변수를 이용해서 하나의 sql통합
 					sql="select count(*) from b4 where "+search+" like '%"+
 				searchtext+"%'";
@@ -181,9 +181,9 @@ public List getArticles(int start,int end) {
 				if (search == null | search == "") {
 					sql = "select * from b4 order by b4_num desc limit ?,?";// 1,10
 				} else { // 제목+본문
-					if (search.equals("title_content")) { // 제목+본문
+					if (search.equals("all")) { // 제목+본문
 						sql = "select * from b4 where b4_title like '%" +searchtext+ "%' or b4_content like '%"
-								+searchtext+ "%' order by b4_num desc limit ?,?";
+								+searchtext+ "%' or adminID like '%"+searchtext+"%' order by b4_num desc limit ?,?";
 					} else { // 제목,작성자 -> 매개변수를 이용해서 하나의 sql통합
 						sql = "select * from b4 where " +search+ " like '%" +searchtext
 								+ "%' order by b4_num desc limit ?,?";

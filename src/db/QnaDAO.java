@@ -51,10 +51,10 @@ public class QnaDAO {
 			// ---------------------------------------------------------------
 			if (search == null || search == "") { // 검색분야 선택X
 				sql = "select count(*) from b2"; // select count(*) from member;
-			} else { // 검색분야(제목,작성자,제목+본문)
-				if (search.equals("title_content")) { // 제목+본문
-					sql = "select count(*) from b2 where b2_title like '%" + searchtext + "%' or content like '%"
-							+ searchtext + "%'";
+			} else { // 검색분야
+				if (search.equals("all")) { 
+					sql = "select count(*) from b2 where b2_title like '%" + searchtext + "%' or b2_content like '%"
+							+ searchtext + "%' or userID like '%" + searchtext +"%'";
 				} else { // 제목,작성자 -> 매개변수를 이용해서 하나의 sql통합
 					sql = "select count(*) from b2 where " + search + " like '%" + searchtext + "%'";
 				}
@@ -128,10 +128,12 @@ public class QnaDAO {
 			// --------------------------------------------------------------------------
 			if (search == null | search == "") {
 				sql = "select * from b2 order by b2_reply desc,b2_step asc limit ?,?";// 1,10
-			} else { // 제목+본문
-				if (search.equals("title_content")) { // 제목+본문
+			} else { 
+				if (search.equals("all")) { 
 					sql = "select * from b2 where b2_title like '%" + searchtext + "%' or b2_content like '%"
-							+ searchtext + "%' order by b2_reply desc,b2_step asc limit ?,?";
+							+ searchtext +"%' or userID like '%" + searchtext 
+							+ "%' order by b2_reply desc,b2_step asc limit ?,?";
+					
 				} else { // 제목,작성자 -> 매개변수를 이용해서 하나의 sql통합
 					sql = "select * from b2 where " + search + " like '%" + searchtext
 							+ "%' order by b2_reply desc,b2_step asc limit ?,?";
