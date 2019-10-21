@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+<c:set var="userID" value="${sessionScope.idKey}" />
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
@@ -29,44 +30,45 @@
                         <ul>
                             <li><a href="index.html">Home</a></li>
                             <li><a href="mypage1.html">마이페이지</a></li>
-                            <li><a href="basketlist.html">관심도서</a></li>
+                            <li><a href="basketlist.jsp">관심도서</a></li>
                         </ul>
                     </div>
                     <h2 class="page-title">관심도서</h2>
                 </div>
-                
+                <b><c:out value="${userID}" /></b>님의 관심도서목록
                 <div class="board board-area">
                     <table class="table tac">
                         <colgroup>
+                        	<col class="bookID">
                             <col class="book-list-title">
                             <col class="book-list-writer">
                             <col class="book-list-status">
                         </colgroup>
                         <thead>
                             <tr>
+                            	<th class="bookID">자료번호</th>
                                 <th class="book-list-title">자료명</th>
                                 <th class="book-list-writer">저자</th>
                                 <th class="book-list-status">관리</th>
                             </tr>
                         </thead>
                         <tbody>
+                        
+                        <c:forEach var="basket" items="${basketlist}">
                             <tr>
-                                <td class="book-list-title">엔터프라이즈 자바 마이크로서비스 : JVM 기반 대규모 애플리케이션을 마이크로서비스로 설계, 구축, 관리하는 기술</td>
-                                <td class="book-list-writer">켄 피니건 지음 ; 오현석 옮김</td>
-                                <td class="book-list-status"><button type="button" class="btn loan-off">관심취소</button></td>
+                            	<td class="bookID">${basket.bookID }</td>
+                                <td class="book-list-title">${basket.bookName}</td>
+                                <td class="book-list-writer">${basket.bookWriter }</td>
+                                <td class="book-list-status">
+                                	<input type="button" class="btn loan-off" value="관심취소"
+                                		onclick="document.location.href='interDel.do?userID=${userID}&bookID=${basket.bookID}'">
+                                </td>
                             </tr>
+                        </c:forEach>
                             
                         </tbody>
                     </table>
-                    <div class="pagination tac">
-                        <a href="#" class="page-btn prev">이전</a>
-                        <a href="#" class="page-num current">1</a>
-                        <a href="#" class="page-num">2</a>
-                        <a href="#" class="page-num">3</a>
-                        <a href="#" class="page-num">4</a>
-                        <a href="#" class="page-num">5</a>
-                        <a href="#" class="page-btn next">다음</a>
-                    </div>
+                    
                 </div>
 			</div>
 		</div>

@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+<c:set var="userID" value="${sessionScope.idKey}" />
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
@@ -31,6 +32,12 @@
                     </div>
                     <h2 class="page-title">신착도서</h2>
                 </div>
+                <%-- <b><c:out value="${userID}" /></b>님 환영합니다. --%>
+                <form method="post" action="interBookProc.do">
+	                <input type="hidden" name="userID" value="${userID}">
+	                <input type="hidden" name="bookID" value="${book.bookID}">
+                	<input type="hidden" name="bookName" value="${book.bookName}">
+                	<input type="hidden" name="bookWriter" value="${book.bookWriter}"> 
                 <div class="result-detail">
                     <div class="detail-thumbnail">
                         <div class="image"><img src="${book.bookImage }" alt="표지"></div>
@@ -52,10 +59,12 @@
                     </div>
                 </div>
                 <div class="btn-area tac">
-                    <button type="button" class="btn deep-blue">관심도서담기</button>
+                    <!-- <button type="button" class="btn deep-blue">관심도서담기</button> -->
+                    <input type="submit" value="관심도서담기" class="btn deep-blue" >
                     <a href="basketlist.jsp" class="btn blue-gray">관심도서목록</a>
                     <a href="javascript:history.back();" class="btn gray">목록</a>
                 </div>
+                </form>
                 <div class="add-section">
                     <h4 class="section-heading"><span>서평정보</span></h4>
                     <div class="section-body">${book.bookContent }</div>

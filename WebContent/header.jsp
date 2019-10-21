@@ -95,7 +95,7 @@
 									<li><a href="mypage3.html">대출이력</a></li>
 								</ul>
 							</li>
-							<li><a href="basketlist.html">관심도서</a></li>
+							<li><a href="basketlist.do?userID=${userID}">관심도서</a></li>
 							<li>
 								<a href="myboard1.html">나의 게시글</a>
 								<ul>

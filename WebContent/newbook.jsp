@@ -58,7 +58,7 @@
                                 <input type="checkbox" name="bookCheckAll" id="bookCheckAll" title="전체 선택">
                             </div>                            
                             <button type="button" class="btn function1">관심자료담기</button>
-                            <a href="basketlist.html" class="btn function2">관심자료보기</a>
+                            <a href="basketlist.jsp" class="btn function2">관심자료보기</a>
                         </div>
                         <div class="right">
                             <select name="sort" id="sort" class="select" title="정렬방식 선택">
