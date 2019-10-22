@@ -996,6 +996,7 @@ function fnCheckPassword(uid, upw)
 }
 
 $(function() {
+	
 //	$("#birthday").datepicker({dateFormat: 'yy/mm/dd', yearRange: '-30:+0'});
 	$('#selEmail').change(typeEmail);
 

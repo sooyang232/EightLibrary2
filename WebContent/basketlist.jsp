@@ -14,11 +14,13 @@
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/function.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
 	<link rel="stylesheet" type="text/css" href="css/common.css">
 	<link rel="stylesheet" type="text/css" href="css/sub.css">
 </head>
+
 <body>
 	<c:import url="header.jsp"/>
 
@@ -60,8 +62,9 @@
                                 <td class="book-list-title">${basket.bookName}</td>
                                 <td class="book-list-writer">${basket.bookWriter }</td>
                                 <td class="book-list-status">
-                                	<input type="button" class="btn loan-off" value="관심취소"
-                                		onclick="document.location.href='interDel.do?userID=${userID}&bookID=${basket.bookID}'">
+                                		<input type="button" class="btn loan-off" value="관심취소" id="interDelete"
+                                		onclick="if(confirm('관심도서를 취소하시겠습니까?'))
+                                		{document.location.href='interDel.do?userID=${userID}&bookID=${basket.bookID}'}">
                                 </td>
                             </tr>
                         </c:forEach>
