@@ -32,7 +32,7 @@
                     </div>
                     <h2 class="page-title">신착도서</h2>
                 </div>
-                <%-- <b><c:out value="${userID}" /></b>님 환영합니다. --%>
+                
                 <form method="post" action="interBookProc.do">
 	                <input type="hidden" name="userID" value="${userID}">
 	                <input type="hidden" name="bookID" value="${book.bookID}">
@@ -59,9 +59,14 @@
                     </div>
                 </div>
                 <div class="btn-area tac">
-                    <!-- <button type="button" class="btn deep-blue">관심도서담기</button> -->
+                <c:if test="${empty userID}">
+                    <a onclick="alert('로그인 후 이용가능합니다.')" href="login.do" class="btn deep-blue">관심도서담기</a>
+                    <a onclick="alert('로그인 후 이용가능합니다.')" href="login.do" class="btn blue-gray">관심도서목록</a>
+                </c:if>
+                <c:if test="${!empty userID}">
                     <input type="submit" value="관심도서담기" class="btn deep-blue" >
                     <a href="basketlist.jsp" class="btn blue-gray">관심도서목록</a>
+                </c:if>    
                     <a href="javascript:history.back();" class="btn gray">목록</a>
                 </div>
                 </form>

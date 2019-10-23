@@ -68,7 +68,8 @@
 									<c:out value="${number}" />
          								<c:set var="number"  value="${number-1}" />
 								</td>
-								<td class="board-list-title"><a href="qnaView.do?num=${article.b2_num}&pageNum=${pgList.currentPage}">
+								<td class="board-list-title">
+									<a href="qnaView.do?num=${article.b2_num}&pageNum=${pgList.currentPage}">
 										<div class="board-default-cut-strings">
 											<c:if test="${article.b2_step==1}">
 											<img src="img/sub/icon-reply.png" alt="">

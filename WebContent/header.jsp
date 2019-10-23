@@ -77,7 +77,20 @@
 					<li>
 						<c:if test="${empty userID}">
 							<a onclick="alert('로그인 후 이용가능합니다.')" href="login.do">마이페이지</a>
+							<ul class="sub-menu">
+							<li>
+								<a onclick="alert('로그인 후 이용가능합니다.')" href="login.do">회원정보</a>
+							</li>								
+							<li>
+								<a onclick="alert('로그인 후 이용가능합니다.')" href="login.do">대출/예약/이력</a>
+							</li>
+							<li><a onclick="alert('로그인 후 이용가능합니다.')" href="login.do">관심도서</a></li>
+							<li>
+								<a onclick="alert('로그인 후 이용가능합니다.')" href="login.do">나의 게시글</a>
+							</li>							
+						</ul>
 						</c:if>
+						
 						<c:if test="${!empty userID}">
 							<a href="usermodify.html">마이페이지</a>
 						<ul class="sub-menu">
