@@ -75,7 +75,11 @@
                            </ul>
                        </li>
 					<li>
-						<a href="usermodify.html">마이페이지</a>
+						<c:if test="${empty userID}">
+							<a onclick="alert('로그인 후 이용가능합니다.')" href="login.do">마이페이지</a>
+						</c:if>
+						<c:if test="${!empty userID}">
+							<a href="usermodify.html">마이페이지</a>
 						<ul class="sub-menu">
 							<li>
 								<a href="usermodify.html">회원정보</a>
@@ -104,6 +108,7 @@
 								</ul>
 							</li>							
 						</ul>
+						</c:if>
 					</li>
 				</ul>
 			</div>
