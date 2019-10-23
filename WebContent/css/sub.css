@@ -897,8 +897,31 @@ select.select{
 	text-align: center;
 	vertical-align: middle;
 }
-.board-area tbody .board-list-title{
+.board-area table .board-list-uid{
+	width: 80px;
+}
+.board-area table th.board-list-title{
+	width: auto;
+}
+.board-area table td.board-list-title{
 	text-align: left;
+	width: auto;
+}
+.board-area table .board-list-title img{
+	display: inline;
+	margin: 0;
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+}
+.board-area table .board-list-user{
+	width: 130px;
+}
+.board-area table .board-list-date{
+	width: 130px;
+}
+.board-area table .board-list-view{
+	width: 90px;
 }
 .board-default-new-notify{
 	display: inline-block;
@@ -911,7 +934,7 @@ select.select{
 	color: white;
 	background-color: #d9534f;
 	vertical-align: top;
-	margin-top: 2px;
+	margin-top: 6px;
 }
 .board-default-cut-strings{
 	width: auto;

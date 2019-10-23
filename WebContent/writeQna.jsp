@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<c:set var="userID" value="${sessionScope.idKey}" />
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
@@ -54,8 +56,8 @@
                                <tr>
                                    <th scope="row"><label for="userID">작성자</label></th>
                                    <td>
-                                   	<%-- <input type="hidden" name="userID" value="${userID}"> --%>
-                                   	<input type="text" class="form" name="userID" id="userID">
+                                   	<c:out value="${userID }"/>
+                                   	<input type="hidden" name="userID" id="userID" value="${userID}">
                                    </td>
                                </tr>
                                <tr>

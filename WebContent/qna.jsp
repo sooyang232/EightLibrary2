@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+<c:set var="userID" value="${sessionScope.idKey}" />
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
@@ -35,7 +36,7 @@
                    <br>질문 및 답변(Q&A) 이외에 FAQ, 전화 및 이메일 문의, 주제담당사서 문의를 통해 궁금증을 해결할 수 있습니다.</p>
                </div>
                <div class="board-search-box tar">
-                   <form method="post" action="" id="searchForm">
+                   <form method="post" action="qna.do" id="searchForm">
                        <div class="input-box">
                            <select name="search" title="검색 선택" id="search" class="select">
                                <option value="all" selected>전체</option>
@@ -99,16 +100,27 @@
                        </tbody>
                    </table>
                    <div class="pagination tac">
-                       <a href="#" class="page-btn prev">이전</a>
-                       <a href="#" class="page-num current">1</a>
-                       <a href="#" class="page-num">2</a>
-                       <a href="#" class="page-num">3</a>
-                       <a href="#" class="page-num">4</a>
-                       <a href="#" class="page-num">5</a>
-                       <a href="#" class="page-btn next">다음</a>
+                       <c:if test="${pgList.startPage > pgList.blockSize}">
+                        	<a href="qna.do?pageNum=${pgList.startPage-pgList.blockSize}&search=${search}&searchtext=${searchtext}" class="page-btn prev">이전</a>
+                        </c:if>
+                        
+                        <c:forEach var="i" begin="${pgList.startPage}" end="${pgList.endPage}">
+                        	<c:if test="${pgList.currentPage==i}">
+                        		<a href="qna.do?pageNum=${i}&search=${search}&searchtext=${searchtext}" class="page-num current">${i}</a>
+                        	</c:if>
+                        	<c:if test="${pgList.currentPage!=i}">
+                        		<a href="qna.do?pageNum=${i}&search=${search}&searchtext=${searchtext}" class="page-num">${i}</a>
+                        	</c:if>
+                        </c:forEach>
+                        
+                        <c:if test="${pgList.endPage < pgList.pageCount}">
+                        	<a href="qna.do?pageNum=${pgList.startPage+pgList.blockSize}&search=${search}&searchtext=${searchtext}" class="page-btn next">다음</a>
+                        </c:if>
                    </div>
        			<div class="btn-area tar mt0">
+       				<c:if test="${!empty userID}">
                    	<a href="writeQna.do" role="button" class="btn deep-blue">글쓰기</a>
+                   	</c:if>
                	</div>
                </div>
 		</div>

@@ -56,9 +56,9 @@
 						</ul>
 					</li>
 					<li>
-						<a href="board.do">커뮤니티</a>
+						<a href="notice.do">커뮤니티</a>
 						<ul class="sub-menu">
-							<li><a href="board.do">공지&새소식</a></li>
+							<li><a href="notice.do">공지&새소식</a></li>
 							<li><a href="faq.do">자주하는 질문(FAQ)</a></li>
 							<li><a href="qna.do">질문 및 답변(Q&A)</a></li>
 							<li><a href="board.do">자유게시판</a></li>
