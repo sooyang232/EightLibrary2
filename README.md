@@ -41,6 +41,6 @@ Language : Java1.8,JSP2.3,jQuery3.4
 + ahn juhui  
     + github <https://github.com/1234wngml>  
     + blog <https://soondd.tistory.com/>  
-    + email <1234wngml@gmail.com>  
+    + email <1234wngml@naver.com>  
     
 ***
