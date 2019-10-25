@@ -8,6 +8,11 @@ public class UserDAO {
 
 	//pool객체를 선언
 		private DBConnectionMgr pool = null;//풀객체
+		//공통
+		private Connection con=null;
+		private PreparedStatement pstmt=null;	//?
+		private ResultSet rs=null;	//select
+		private String sql="";
 
 		public UserDAO(){
 	     //DBConnectionMgr의 객체를 얻어오는 구문
@@ -25,10 +30,6 @@ public class UserDAO {
 		
 		//회원인지를 체크해주는 메서드(인증)
 	public boolean loginCheck(String id, String passwd) {
-		//DB접속
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
 		boolean check = false;// 로그인성공유무
 		//DB작업(select)
@@ -55,11 +56,6 @@ public class UserDAO {
 	
 	 //중복ID를 체크하는 메서드
 	 public boolean checkId(String id){
-	  
-	    //DB접속
-		Connection con = null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
 	    
 		boolean check = false;//중복ID유무
 		//DB작업(select)
@@ -95,9 +91,6 @@ public class UserDAO {
 	//회원가입->화면에 출력(빈즈데이터)->DB
 	 public boolean userInsert(UserDTO user){
 	   
-	   //DB접속
-		Connection con = null;
-		PreparedStatement pstmt=null;    
 		boolean check = false;//회원가입성공유무
 		String sql = null;
 
@@ -134,5 +127,64 @@ public class UserDAO {
 	      pool.freeConnection(con,pstmt);
 		}
 	   return check;
+	 }
+	 //회원정보수정->회원정보불러오기
+	 public UserDTO getUser(String id) {
+		 UserDTO user=null;
+		 
+		 try {
+				con = pool.getConnection();
+
+				sql = "select * from user where userID=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				
+				// 글목록보기
+				if (rs.next()) {// 레코드가 최소 만족 1개이상 존재한다면
+					user = new UserDTO();
+					
+					user.setUserID(rs.getString("userID"));
+					user.setUserPWD(rs.getString("userPWD"));
+					user.setUserName(rs.getString("userName"));
+					user.setUserEmail(rs.getString("userEmail"));
+					user.setUserTel(rs.getString("userTel"));
+
+				}
+			} catch (Exception e) {
+				System.out.println("getUser() 메서드 에러유발" + e);
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+		 
+		 return user;
+	 }
+	 //회원정보수정
+	 public boolean userUpdate(UserDTO user) {
+		 boolean check = false;//회원정보수정 성공유무
+		 
+			 try {
+				 con = pool.getConnection();
+
+				 sql = "update user set userTel=?,userEmail=? where userID=?";
+				 pstmt=con.prepareStatement(sql);
+				 
+				 pstmt.setString(1, user.getUserTel());
+				 pstmt.setString(2, user.getUserEmail());
+				 pstmt.setString(3, user.getUserID());
+				 
+				 int update=pstmt.executeUpdate();
+				 System.out.println("회원정보 수정 성공유무(update)=>"+update);//1 or 0실패
+				 
+				 if(update > 0){
+					 check = true;//데이터입력 성공
+				  }
+			} catch (Exception e) {
+				System.out.println("userUpdate() 메서드 에러유발" + e);
+			}finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+		 
+		 return check;
 	 }
 }

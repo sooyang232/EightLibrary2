@@ -92,10 +92,10 @@
 						</c:if>
 						
 						<c:if test="${!empty userID}">
-							<a href="usermodify.html">마이페이지</a>
+							<a href="usermodify.do?userID=${userID}">마이페이지</a>
 						<ul class="sub-menu">
 							<li>
-								<a href="usermodify.html">회원정보</a>
+								<a href="usermodify.do?userID=${userID}">회원정보</a>
 								<ul>
 									<li><a href="usermodify.html">회원정보수정</a></li>
 									<li><a href="passwordchange.html">비밀번호변경</a></li>

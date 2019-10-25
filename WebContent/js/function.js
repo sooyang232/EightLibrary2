@@ -803,6 +803,43 @@ function join() {
 	//document.getElementById("joinBtn").style.display = "none";
 	form.submit();
 }
+//회원정보수정 체크
+function modifyUser(){
+	//alert("modifyUser!");
+	var form = document.modifyUserForm;
+	
+	// 비밀번호 체크
+	if (isEmpty(form.userPWD)) {
+		alert("비밀번호를 입력해주세요.");
+		form.userPWD.focus();
+		return;
+	}
+	if (isEmpty(form.p_confirm)) {
+		alert("비밀번호 확인란을 입력해주세요.");
+		form.p_confirm.focus();
+		return;
+	}
+	if (form.userPWD.value != form.p_confirm.value) {
+		alert("비밀번호가 일치하지 않습니다. 다시 확인하시고 입력해 주세요.");
+		form.p_confirm.focus();
+		return;
+	}
+	
+	// 전화번호, 휴대전화번호 체크	
+	if (isEmpty(form.userTel) ) {
+		alert("연락처를 입력해주세요.");
+		form.userTel.focus();
+		return;
+	}
+	//이메일 체크
+	if(isEmpty(form.userEmail)){
+		alert("이메일을 입력해주세요.");
+		form.userEmail.focus();
+		return;
+	}
+	
+	form.submit();
+}
 
 /**
  * 장애구분,등급
@@ -1010,7 +1047,7 @@ $(function() {
 //		RegisterUserCardView('OPEN', 'Layer1');
 //	});
 	$('#joinBtn').click(join);
-	
+	$('#modifyUserBtn').click(modifyUser);
 	// 장애구분
 	$('select[name=dsab_kind]').change(function(e) {
 		$('tr#libraryFaxTr_2').hide();
