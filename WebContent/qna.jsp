@@ -28,7 +28,8 @@
                    <div class="breadcrumbs">
                        <ul>
                            <li><a href="#">Home</a></li>
-                           <li><a href="#">자료검색</a></li>
+                           <li><a href="#">커뮤니티</a></li>
+                           <li><a href="#">질문 및 답변(Q&A)</a></li>
                        </ul>
                    </div>
                    <h2 class="page-title">질문 및 답변(Q&A)</h2>

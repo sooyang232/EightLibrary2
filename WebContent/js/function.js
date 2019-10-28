@@ -661,83 +661,7 @@ function changeP(o) {
 	}
 }
 
-// 시각장애인 선택시 보여줄 tr 을 선택하는 메소드
-function changeTR(o) {
-   	if (o.checked) {
-		document.getElementById("dsab_grdTr").style.display = "";
-		document.getElementById("upFileTr").style.display = "";
-		document.getElementById("presentTr").style.display = "";
-		document.getElementById("dsab_grd").value = "";
-		document.getElementById("upFile").select();
-		document.selection.clear();
-		document.getElementById("dsab_grd").focus();
-    } else {
-    	document.getElementById("dsab_grdTr").style.display = "none";
-		document.getElementById("upFileTr").style.display = "none";
-		document.getElementById("presentTr").style.display = "none";
-		document.getElementById("dsab_grd").value = "";
-		document.getElementById("upFile").select();
-		document.selection.clear();
-	}
-}
 
-function nondis(o) {
-   	if (o.value == "1") {
-		document.getElementById("dsab_grdTr_2").style.display = "none";
-//		document.getElementById("upFileTr_2").style.display = "none";
-		document.getElementById("libraryFaxTr_2").style.display = "none";
-		var dsabYn = $(':checkbox[name=dsab_yn]');
-		var bookchYn = $(':checkbox[name=bookch_yn]').val();
-		if (dsabYn.attr('checked')) {
-			$('div#dsab_non_win').css('display', '');
-			$('span#dsabNonMesg').html('비장애인은 시각장애인 원문서비스를 이용할 수 없으므로, 시각장애인 원문서비스 이용여부가 체크해제되었습니다');
-			dsabYn.attr('checked', false);
-		}
-	} else {
-		document.getElementById("dsab_grdTr_2").style.display = "";
-//		document.getElementById("upFileTr_2").style.display = "";
-		document.getElementById("libraryFaxTr_2").style.display = "";
-		$('div#dsab_non_win').css('display', 'none');
-	}
-}
-
-function changeClass(o) {
-	var divname = o.id;
-	/*
-	if (divname == "bookch_yn") {		
-		if ('${tempMemberBean.bookch_yn}' == 'Y' || '${site}' == 'nill') {
-			o.checked = true;
-		}
-	} else {
-	}
-	*/
-	if (o.checked) {
-		document.getElementById(divname+ "_div").style.display = "";
-		// 18 nov, nill의 추가값에 따른 추가
-		document.getElementById("nill_yn").value = "Y";
-		document.getElementById("nill_user_status").value = "1";
-	} else {
-		document.getElementById(divname+ "_div").style.display = "none";
-		document.getElementById("nill_yn").value = "";
-		document.getElementById("nill_user_status").value = "";
-		// lyjun 책바다 체크 풀면 값 초기화
-		if (divname == "bookch_yn"){
-			document.getElementById("libname").value= "";
-			document.getElementById("userkey").value= "";
-		}
-	}			
-}
-		
-// lyjun 책바다 체크해야 이용자번호 입력
-function bookch_yn_check() {
-	if (!document.memberForm.bookch_yn.checked) {	
-		alert("책바다 국가상호대차서비스 이용여부를 선택해야 이용자번호를 입력하실 수 있습니다.");
-		document.getElementById("userkey").value= "";
-		//document.getElementById("bookch_yn").focus();
-		document.getElementById("userkey").focus();
-		return false;
-	}
-}
 //회원가입
 function userReg(){
 	document.location="join1.do";
@@ -1046,8 +970,8 @@ $(function() {
 //	$(':image[name=examBtn]').click(function(e) {
 //		RegisterUserCardView('OPEN', 'Layer1');
 //	});
-	$('#joinBtn').click(join);
-	$('#modifyUserBtn').click(modifyUser);
+	//$('#joinBtn').click(join);
+	//$('#modifyUserBtn').click(modifyUser);
 	// 장애구분
 	$('select[name=dsab_kind]').change(function(e) {
 		$('tr#libraryFaxTr_2').hide();

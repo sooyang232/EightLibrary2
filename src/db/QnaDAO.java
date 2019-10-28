@@ -312,5 +312,61 @@ public class QnaDAO {
 		}
 		return article;
 	}
+	//나의 게시글 보기 - count
+	public int getBoardCount(String id) {
+		int x=0;	//총 레코드개수를 저장
+		
+		try {
+			con=pool.getConnection();
+			System.out.println("con=>"+con);	//디버깅코드
+			sql="select count(*) from b2 where userID=?";	
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {	//보여주는 결과가 있다면
+				x=rs.getInt(1);
+			}	
+		} catch (Exception e) {
+			System.out.println("getBoard1Count() 메서드 에러유발"+e);
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return x;
+	}
+	//나의 게시글 보기 - 게시글 리스트
+	public List getMyBoards(String id,int cnt) {
+		List board1list = null;
+		try {
+			con = pool.getConnection();
+			sql="select * from b2 where userID=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			
+			if (rs.next()) { // 레코드가 최소 만족 1개 이상 존재한다면
+				board1list = new ArrayList(cnt);
+				do {
+
+					QnaDTO qna=new QnaDTO();
+					
+					qna.setB2_num(rs.getInt("b2_num"));
+					qna.setB2_title(rs.getString("b2_title"));
+					qna.setB2_content(rs.getString("b2_content"));
+					qna.setUserID(rs.getString("userID"));
+					qna.setB2_date(rs.getTimestamp("b2_date"));
+					qna.setB2_view(rs.getInt("b2_view"));
+
+					// 추가
+					board1list.add(qna);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("getInterBooks() 메서드 에러유발"+e);
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return board1list;
+	}
 
 }

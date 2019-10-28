@@ -295,6 +295,62 @@ public List getArticles(int start,int end) {
 			pool.freeConnection(con, pstmt, rs);
 		}
 	}
+	//나의 게시글 보기 - count
+		public int getBoardCount(String id) {
+			int x=0;	//총 레코드개수를 저장
+			
+			try {
+				con=pool.getConnection();
+				System.out.println("con=>"+con);	//디버깅코드
+				sql="select count(*) from b1 where userID=?";	
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {	//보여주는 결과가 있다면
+					x=rs.getInt(1);
+				}	
+			} catch (Exception e) {
+				System.out.println("getBoardCount() 메서드 에러유발"+e);
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return x;
+		}
+		//나의 게시글 보기 - 게시글 리스트
+		public List getMyBoards(String id,int cnt) {
+			List board2list = null;
+			try {
+				con = pool.getConnection();
+				sql="select * from b1 where userID=?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs=pstmt.executeQuery();
+				
+				if (rs.next()) { // 레코드가 최소 만족 1개 이상 존재한다면
+					board2list = new ArrayList(cnt);
+					do {
+
+						BoardDTO board=new BoardDTO();
+						
+						board.setB1_num(rs.getInt("b1_num"));
+						board.setB1_title(rs.getString("b1_title"));
+						board.setB1_content(rs.getString("b1_content"));
+						board.setUserID(rs.getString("userID"));
+						board.setB1_date(rs.getTimestamp("b1_date"));
+						board.setB1_view(rs.getInt("b1_view"));
+
+						// 추가
+						board2list.add(board);
+					} while (rs.next());
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("getMyBoards() 메서드 에러유발"+e);
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return board2list;
+		}
 }
 
 

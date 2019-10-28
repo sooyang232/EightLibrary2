@@ -59,7 +59,11 @@
                         <c:forEach var="basket" items="${basketlist}">
                             <tr>
                             	<td class="bookID">${basket.bookID }</td>
-                                <td class="book-list-title">${basket.bookName}</td>
+                                <td class="book-list-title">
+	                                <a href="newbookView.do?id=${basket.bookID}">
+	                                	${basket.bookName}
+	                                </a>
+                                </td>
                                 <td class="book-list-writer">${basket.bookWriter }</td>
                                 <td class="book-list-status">
                                 		<input type="button" class="btn loan-off" value="관심취소" id="interDelete"

@@ -92,7 +92,7 @@
                            </table>
                            <div class="btn-area tac">
                        <ul>
-                           <li><input type="submit" class="btn lg deep-blue" id="modifyUserBtn" value="회원정보 수정" onclick="modifyUser()"></li>
+                           <li><input type="button" class="btn lg deep-blue" id="modifyUserBtn" value="회원정보 수정" onclick="modifyUser();"></li>
                            <li><a href="#" class="btn lg blue-gray">취소</a></li>
                        </ul>
                    </div>
