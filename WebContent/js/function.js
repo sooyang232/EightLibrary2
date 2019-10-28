@@ -673,6 +673,13 @@ function checkAll(){
 		$("input[type=checkbox]").prop("checked",false);
 	}
 }
+function bookCheckAll(){
+	if($("#bookCheckAll").is(':checked')){
+		$("input[type=checkbox]").prop("checked",true);
+	}else{
+		$("input[type=checkbox]").prop("checked",false);
+	}
+}
 //비어있는 값 체크
 function join() {
 	var form = document.joinForm;

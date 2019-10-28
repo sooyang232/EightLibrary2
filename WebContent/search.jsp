@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+<c:set var="userID" value="${sessionScope.idKey}" />
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
@@ -12,6 +13,7 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="js/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/function.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
 	<link rel="stylesheet" type="text/css" href="css/common.css">
 	<link rel="stylesheet" type="text/css" href="css/sub.css">
@@ -54,10 +56,18 @@
                     <div class="utility-bar">
                         <div class="left">
                             <div class="check-item">
-                                <input type="checkbox" name="bookCheckAll" id="bookCheckAll" title="전체 선택">
+                                <input type="checkbox" name="bookCheckAll" id="bookCheckAll" title="전체 선택" onclick="bookCheckAll();">
                             </div>                            
-                            <button type="button" class="btn function1">관심자료담기</button>
-                            <a href="basketlist.html" class="btn function2">관심자료보기</a>
+                            <c:if test="${empty userID}">
+								<a onclick="alert('로그인 후 이용가능합니다.')" href="login.do"
+									class="btn function1">관심자료담기</a>
+								<a onclick="alert('로그인 후 이용가능합니다.')" href="login.do"
+									class="btn function2">관심자료보기</a>
+							</c:if>
+							<c:if test="${!empty userID}">
+								<button type="button" class="btn function1">관심자료담기</button>
+                            	<a href="basketlist.do?userID=${userID}" class="btn function2">관심자료보기</a>
+                            </c:if>
                         </div>
                         <div class="right">
                             <select name="sort" id="sort" class="select" title="정렬방식 선택">

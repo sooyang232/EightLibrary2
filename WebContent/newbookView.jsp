@@ -65,7 +65,7 @@
                 </c:if>
                 <c:if test="${!empty userID}">
                     <input type="submit" value="관심도서담기" class="btn deep-blue" >
-                    <a href="basketlist.jsp" class="btn blue-gray">관심도서목록</a>
+                    <a href="basketlist.do?userID=${userID}" class="btn blue-gray">관심도서목록</a>
                 </c:if>    
                     <a href="javascript:history.back();" class="btn gray">목록</a>
                 </div>
