@@ -88,6 +88,13 @@
                     
                     <ul class="result-list">
                     <c:forEach var="book" items="${bookList}">
+                    
+                    <form method="post" action="revBookProc.do">
+                    	<input type="hidden" name="userID" value="${userID}">
+	                	<input type="hidden" name="bookID" value="${book.bookID}">
+                		<input type="hidden" name="bookName" value="${book.bookName}">
+                		<input type="hidden" name="bookWriter" value="${book.bookWriter}"> 
+                		
                         <li class="result-item">
                             <div class="check-item">
                                 <input type="checkbox" id="check93154380" value="93154380">
@@ -108,7 +115,7 @@
                                         </div>
                                         <div class="right">
                                             <span class="btn loan-on">
-                                                <a href="#">대출예약</a>
+                                            	<input type="submit" value="대출예약" >
                                             </span>
                                             <span class="btn print">
                                                 <a href="#">위치출력</a>
@@ -118,6 +125,8 @@
                                 </dl>
                             </div>
                         </li>
+                        
+                        </form>
                      </c:forEach>   
                     </ul>
                     
