@@ -689,17 +689,12 @@ function join() {
 		form.userName.focus();
 		return;
 	}
-
-	/*if (!verifyDsab())
-		return false;*/
-
 	// ID 중복 체크 여부 체크
 	if (isEmpty(form.userID)) {
 		alert("아이디를 입력해주세요.");
 		form.userID.focus();
 		return;
 	}
-
 	// 비밀번호 체크
 	if (isEmpty(form.userPWD)) {
 		alert("비밀번호를 입력해주세요.");
@@ -715,8 +710,7 @@ function join() {
 		alert("비밀번호가 일치하지 않습니다. 다시 확인하시고 입력해 주세요.");
 		form.p_confirm.focus();
 		return;
-	}
-	
+	}	
 	// 전화번호, 휴대전화번호 체크	
 	if (isEmpty(form.userTel) ) {
 		alert("연락처를 입력해주세요.");
@@ -729,11 +723,9 @@ function join() {
 		form.userEmail.focus();
 		return;
 	}
-	//======================================================
-	
-	//document.getElementById("joinBtn").style.display = "none";
 	form.submit();
 }
+
 //회원정보수정 체크
 function modifyUser(){
 	//alert("modifyUser!");
@@ -767,8 +759,7 @@ function modifyUser(){
 		alert("이메일을 입력해주세요.");
 		form.userEmail.focus();
 		return;
-	}
-	
+	}	
 	form.submit();
 }
 
