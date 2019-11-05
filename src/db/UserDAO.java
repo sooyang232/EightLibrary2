@@ -128,6 +128,28 @@ public class UserDAO {
 		}
 	   return check;
 	 }
+	 //가입한 회원 email찾기
+	 public String getUserEMail(String id) {
+
+			String result = null;
+
+			try {
+				con = pool.getConnection();
+
+				String sql = "SELECT userEmail FROM user WHERE userID=?";
+				pstmt = con.prepareStatement(sql);
+
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				if(rs.next());
+				result = rs.getString(1);
+				
+			}
+			catch (Exception e) { e.printStackTrace(); }
+			finally { pool.freeConnection(con, pstmt, rs); }
+			
+			return result;
+		}
 	 //회원정보수정->회원정보불러오기
 	 public UserDTO getUser(String id) {
 		 UserDTO user=null;
