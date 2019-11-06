@@ -66,12 +66,12 @@
 						</ul>
 					</li>
                        <li>
-                           <a href="contFacility.html">도서관소개</a>
+                           <a href="contFacility.jsp">도서관소개</a>
                            <ul class="sub-menu">
-                               <li><a href="contFacility.html">시설현황</a></li>
-                               <li><a href="contData.html">자료현황</a></li>
-                               <li><a href="contInfomation.html">이용안내</a></li>
-                               <li><a href="contDirections.html">찾아오시는길</a></li>
+                               <li><a href="contFacility.jsp">시설현황</a></li>
+                               <li><a href="contData.jsp">자료현황</a></li>
+                               <li><a href="contInfomation.jsp">이용안내</a></li>
+                               <li><a href="contDirections.jsp">찾아오시는길</a></li>
                            </ul>
                        </li>
 					<li>

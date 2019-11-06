@@ -27,11 +27,11 @@
                        <ul>
                            <li><a href="#">Home</a></li>
                            <li><a href="#">커뮤니티</a></li>
-                           <li><a href="#">게시판 문의</a></li>
+                           <li><a href="#">질문 및 답변(Q&A)</a></li>
                        </ul>
                    </div>
-                   <h2 class="page-title">게시판 문의</h2>
-                   <p class="sub-title">게시판 문의는 로그인해야만 작성할 수 있으며, 비밀글 사용이 가능합니다.<br>게시판 문의 이외에 FAQ, 전화 및 이메일 문의, 주제담당사서 문의를 통해 궁금증을 해결할 수 있습니다.</p>
+                   <h2 class="page-title">질문 및 답변(Q&A)</h2>
+                   
                </div>
                
                <div class="board regist-area">
