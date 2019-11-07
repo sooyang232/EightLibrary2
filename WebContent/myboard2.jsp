@@ -34,7 +34,7 @@
                             <li><a href="myboard2.do?userID=${userID }">자유게시판</a></li>
                         </ul>
                     </div>
-                    <h2 class="page-title">자유게시판</h2>
+                    <h2 class="page-title">나의 게시글</h2>
                 </div>
                 <div class="sub-tab-menu">
                     <ul class="tab-menu-list">

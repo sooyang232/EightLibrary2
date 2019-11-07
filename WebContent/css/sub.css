@@ -154,31 +154,23 @@
 	font-size: 0.8rem;
 }
 .btn.sm{
-	/*height: 2rem;*/
-	/*line-height: 2rem;*/
 	height: 1.6rem;
 	line-height:1.6rem;
 	padding: 0 .3rem;
 	font-size: 0.9rem;
 }
 .btn.md{
-	/*height: 2.25rem;*/
-	/*line-height: 2.25rem;*/
 	height: 2.1rem;
 	line-height: 2.1rem;
 }
 .btn.lg{
-	/*height: 2.5rem;*/
-	/*line-height: 2.5rem;*/
-	height: 2.2rem;
-	line-height: 2.2rem;
+	height: 2.7rem;
+	line-height: 2.7rem;
 	font-size: 1.1rem;
 }
 .btn.xl{
-	/*height: 3rem;*/
-	/*line-height: 3rem;*/
-	height: 2.5rem;
-	line-height: 2.5rem;
+	height: 3rem;
+	line-height: 3rem;
 	font-size: 1.2rem;
 }
 .btn.margin{
@@ -897,31 +889,8 @@ select.select{
 	text-align: center;
 	vertical-align: middle;
 }
-.board-area table .board-list-uid{
-	width: 80px;
-}
-.board-area table th.board-list-title{
-	width: auto;
-}
-.board-area table td.board-list-title{
+.board-area tbody .board-list-title{
 	text-align: left;
-	width: auto;
-}
-.board-area table .board-list-title img{
-	display: inline;
-	margin: 0;
-	width: 16px;
-	height: 16px;
-	vertical-align: middle;
-}
-.board-area table .board-list-user{
-	width: 130px;
-}
-.board-area table .board-list-date{
-	width: 130px;
-}
-.board-area table .board-list-view{
-	width: 90px;
 }
 .board-default-new-notify{
 	display: inline-block;
@@ -934,7 +903,7 @@ select.select{
 	color: white;
 	background-color: #d9534f;
 	vertical-align: top;
-	margin-top: 6px;
+	margin-top: 2px;
 }
 .board-default-cut-strings{
 	width: auto;
@@ -1507,9 +1476,8 @@ dl.list.line dt, dl.list.line dd{
 	box-sizing: border-box;
 	padding: 0 5px;
 }
-.login-wrap .login-btn ul li a,.login-wrap .login-btn ul li input{
+.login-wrap .login-btn ul li a{
 	display: block;
-	width: 100%;
 }
 
 /* 회원가입 */
@@ -1596,6 +1564,7 @@ dl.list.line dt, dl.list.line dd{
 }
 .join-box{
 	border-bottom: 1px solid #ccc;
+	padding: 10px;
 	margin: 50px 0 10px;
 	position: relative;
 }
@@ -1610,9 +1579,6 @@ dl.list.line dt, dl.list.line dd{
 	background: -webkit-gradient(linear, left top, right top, from(#3251ed), to(#01c0c8));
 	background: -o-linear-gradient(left, #3251ed, #01c0c8);
 	background: linear-gradient(to right, #3251ed, #01c0c8);
-}
-.join-box textarea{
-	padding: 10px;
 }
 .join-box + p.tar{
 	font-size: 14px;
@@ -1675,9 +1641,8 @@ dl.list.line dt, dl.list.line dd{
 	box-sizing: border-box;
 	padding: 0 5px;
 }
-.join-wrap .btn-area ul li a, .join-wrap .btn-area ul li input{
+.join-wrap .btn-area ul li a{
 	display: block;
-	width: 100%;
 }
 
 /* 마이페이지 */
@@ -1724,4 +1689,286 @@ td.book-list-title{
 	border-color: #EF5350;
 }
 
+.find-wrap{
+	margin-top: 70px;
+}
+.find-wrap table{margin-top: 50px;}
+.find-wrap th{
+	text-align: center;
+}
+.find-wrap .t1{
+	font-size: 22px;
+	color: #000;
+	font-weight: 500;
+	margin-bottom: 7px;
+}
+.find-wrap .t2{
+	font-size: 16px;
+	line-height: 1.7;
+	color: #727171;
+	margin-bottom: 20px;
+}
+.find-wrap .t2 span{
+	display: block;
+}
 
+.find-wrap .btn-area{
+	width: 450px;
+	margin: 3rem auto;
+}
+.find-wrap .btn-area ul{
+	margin: 0 -5px;
+}
+.find-wrap .btn-area ul::after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.find-wrap .btn-area ul li{
+	width: 50%;
+	float: left;
+	box-sizing: border-box;
+	padding: 0 5px;
+}
+.find-wrap .btn-area ul li a, .find-wrap .btn-area ul li input{
+	display: block;
+	width: 100%;
+}
+.find-result{
+	border-top: 3px solid #45495b;
+	border-bottom: 1px solid #81828a;
+	text-align: center;
+	margin-top: 15px;
+}
+.find-result .r1{
+	font-size: 27px;
+	font-weight: 500;
+	margin-top: 80px;
+	margin-bottom: 15px;
+}
+.find-result .r1 span{
+	display: inline-block;
+	margin-left: 10px;
+}
+.find-result .r2{
+	font-size: 16px;
+	color: #666;
+	margin-bottom: 80px;
+}
+.find-result ul{
+	max-width: 460px;
+	margin: 70px auto 60px;
+}
+.find-result ul > li{
+	padding-left: 115px;
+	position: relative;
+	margin: 15px 0;
+}
+.find-result ul > li label{
+	font-size: 17px;
+	font-weight: 500;
+	color: #000;
+	position: absolute;
+	left: 0;
+	top: 7px;
+	width: 100px;
+	text-align: right;
+}
+.find-result ul > li input[type=text], .find-result ul > li input[type=password]{
+	height: 44px;
+	width: 100%;
+	font-size: 15px;
+	padding: 0 4%;
+}
+
+/* 열람실 예약신청 */
+.reserve-seat-wrap{
+	max-width: 730px;
+	margin: 100px auto;
+}
+.legend-box{
+	margin-bottom: 30px;
+}
+.legend-box li{
+	display: inline-block;
+	padding-left: 25px;
+	color: #666;
+	font-size: 14px;
+	line-height: 20px;
+	margin-right: 20px;
+}
+.legend-box li:last-child{
+	margin-right: 0;
+}
+.legend-box .type1{
+	background: url(../img/sub/legend_box_type1.png) 0 center no-repeat;
+}
+.legend-box .type2{
+	background: url(../img/sub/legend_box_type2.png) 0 center no-repeat;
+}
+.seat-btn ul{
+	font-size: 0;
+}
+.seat-btn li{
+	display: inline-block;
+	margin: 3px 1px;
+}
+.seat-btn li:nth-child(2n+1){
+	margin-left: 5px;
+}
+.seat-btn li:nth-child(6n+1){
+	margin-left: 30px;
+}
+.seat-btn li:nth-child(18n+1){
+	margin-left: 0;
+}
+.seat-btn li button{
+	display: block;
+	width: 34px;
+	height: 27px;
+	font-weight: 600;
+	text-align: center;
+	line-height: 27px;
+	background: none;
+}
+.seat-btn .type1 button{
+	color: #999;
+	border: 1px solid #999;
+	background: url(../img/sub/seat_btn_type1.png) center center no-repeat;
+	cursor: text;
+}
+.seat-btn .type2 button{
+	color: #3251ed;
+	border: 1px solid #3251ed;
+	cursor: pointer;
+}
+.seat-btn .type2 button.selected{
+	background: #3251ed;
+	color: #fff;
+}
+.seat_submit{
+	text-align: center;
+	margin-top: 80px;
+}
+.seat_submit input,.seat_submit a{
+	width: 220px;
+}
+
+/* 열람실 예약확인 */
+.seat-list-num{
+	width: 15%;
+}
+.seat-list-date{
+	width: 25%;
+}
+.seat-list-room{
+	width: 20%;
+}
+.seat-list-id{
+	width: 10%;
+}
+.seat-list-status{
+	width: 20%;
+}
+
+.seat-list-status .status::before{
+	content: '[';
+}
+.seat-list-status .status::after{
+	content: ']';
+}
+.seat-list-status .status.available{
+	color: #42A5F5;
+}
+.seat-list-status .status.ing{
+	color: #96a1ab;
+}
+.seat-list-status .status.not-available{
+	color: #EF5350;
+}
+.seat-list-status .btn.loan-on{
+	color: #42A5F5;
+	border-color: #42A5F5;
+	margin-top: 5px;
+}
+.seat-list-status .btn.loan-off{
+	color: #EF5350;
+	border-color: #EF5350;
+	margin-top: 5px;
+}
+.ls_pop{
+	margin-top: 80px;
+	box-shadow: 0 0 30px rgba(0,0,0,0.2);
+}
+.ls_pop .popHeader{
+	height: 45px;
+	background: #4c74c4;
+	color: #FFF;
+	border-bottom: #3258a3 2px solid;
+	position: relative;
+}
+.popHeader h3{
+	font-size: 16px;
+	color: #FFF;
+	position: absolute;
+	top: 15px;
+	left: 20px;
+	height: 18px;
+	line-height: 18px;
+	font-weight:bold;
+}
+.popContents{
+	padding: 20px;
+}
+div.infoTable{
+	clear: both;
+	margin: 0 0 0;
+	position: relative;
+	border-top: 1px solid #666 !important;
+	border-bottom: 1px solid #666 !important;
+}
+div.infoTable table{
+	clear: both;
+	width: 100%;
+	border-top: 1px solid #666 !important;
+	border-bottom: 1px solid #666 !important;
+	table-layout: fixed;
+}
+div.infoTable table th{
+	border-bottom: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	padding: 10px 0;
+	font-weight: bold;
+	background-color: #fbfbfb;
+	text-align: left;
+	padding: 0 10px;
+}
+div.infoTable table td{
+	border-left: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding: 10px;
+	text-align: left;
+	font-weight: normal;
+}
+div.infoTable table tr td:first-child{
+	border-left: none;
+}
+div.infoTable table tr th:first-child{
+	border-left: none;
+}
+.notice_info{
+	border: #ccc 1px solid;
+	padding: 10px;
+	font-size: 12px;
+	line-height: 160%;
+	margin-top: 10px;
+}
+.notice_info .title{
+	font-size: 12px !important;
+	font-weight:bold;
+}
+.notice_info li{
+	line-height: 150%;
+}

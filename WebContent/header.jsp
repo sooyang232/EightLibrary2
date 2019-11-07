@@ -49,10 +49,10 @@
 						</ul>
 					</li>
 					<li>
-						<a href="reserveroom.html">열람실예약</a>
+						<a href="reserveroom.jsp">열람실예약</a>
 						<ul class="sub-menu">
-							<li><a href="reserveroom.html">예약신청</a></li>
-							<li><a href="reserveroomstatus.html">예약확인/취소</a></li>
+							<li><a href="reserveroom.jsp">예약신청</a></li>
+							<li><a href="reserveroomstatus.jsp">예약확인/취소</a></li>
 						</ul>
 					</li>
 					<li>

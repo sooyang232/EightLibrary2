@@ -54,6 +54,12 @@
 			var item_id = "#" + $(this).attr( "data-item-id" );
 			$(item_id).addClass('display-hide');
 		});
+		
+		$(".seat-btn button").click(function(){
+			$(".seat-btn button").removeClass("selected");
+			$(this).addClass("selected");
+			$("#seatID").html("디지털 열람실 "+$(this).text());
+		})
 	});
 
 	function resizeLayout() {
