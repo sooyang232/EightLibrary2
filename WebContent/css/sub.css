@@ -889,8 +889,53 @@ select.select{
 	text-align: center;
 	vertical-align: middle;
 }
-.board-area tbody .board-list-title{
+.board-area table .board-list-uid{
+	width: 80px;
+}
+.board-area table th.board-list-title{
+	width: auto;
+}
+.board-area table td.board-list-title{
 	text-align: left;
+	width: auto;
+}
+.board-area table .board-list-title img{
+	display: inline;
+	margin: 0;
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+}
+.board-area table .board-list-user{
+	width: 130px;
+}
+.board-area table .board-list-date{
+	width: 130px;
+}
+.board-area table .board-list-view{
+	width: 90px;
+}
+.board-area table .bookID{
+	width: 130px;
+}
+.board-area table th.book-list-title{
+	width: auto;
+}
+.board-area table td.book-list-title{
+	text-align: left;
+	width: auto;
+}
+.board-area table .book-list-writer{
+	width: 200px;
+}
+.board-area table .book-list-reservedate{
+	width: 116px;
+}
+.board-area table .book-list-reserveduedate{
+	width: 116px;
+}
+.board-area table .book-list-status{
+	width: 76px;
 }
 .board-default-new-notify{
 	display: inline-block;
@@ -903,7 +948,7 @@ select.select{
 	color: white;
 	background-color: #d9534f;
 	vertical-align: top;
-	margin-top: 2px;
+	margin-top: 6px;
 }
 .board-default-cut-strings{
 	width: auto;
@@ -1268,6 +1313,16 @@ dl.list.line dt, dl.list.line dd{
 .result-item .book-status .status.not-available{
 	color: #EF5350;
 }
+.result-item .book-status .btn input{
+	background: transparent;
+    border: none;
+    font: inherit;
+    color: inherit;
+    padding: 0;
+    cursor: pointer;
+    display: inline;
+    line-height: 1.3;
+}
 .result-item .book-status .btn.loan-on{
 	color: #42A5F5;
 	border-color: #42A5F5;
@@ -1476,8 +1531,9 @@ dl.list.line dt, dl.list.line dd{
 	box-sizing: border-box;
 	padding: 0 5px;
 }
-.login-wrap .login-btn ul li a{
+.login-wrap .login-btn ul li a,.login-wrap .login-btn ul li input{
 	display: block;
+	width: 100%;
 }
 
 /* 회원가입 */
@@ -1580,6 +1636,9 @@ dl.list.line dt, dl.list.line dd{
 	background: -o-linear-gradient(left, #3251ed, #01c0c8);
 	background: linear-gradient(to right, #3251ed, #01c0c8);
 }
+.join-box textarea{
+	padding: 10px;
+}
 .join-box + p.tar{
 	font-size: 14px;
 }
@@ -1641,8 +1700,9 @@ dl.list.line dt, dl.list.line dd{
 	box-sizing: border-box;
 	padding: 0 5px;
 }
-.join-wrap .btn-area ul li a{
+.join-wrap .btn-area ul li a, .join-wrap .btn-area ul li input{
 	display: block;
+	width: 100%;
 }
 
 /* 마이페이지 */

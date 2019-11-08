@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <c:set var="userID" value="${sessionScope.idKey}" />
 <html lang="ko">
@@ -17,7 +18,11 @@
 	<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
 	<link rel="stylesheet" type="text/css" href="css/common.css">
 	<link rel="stylesheet" type="text/css" href="css/sub.css">
-	
+	<script>
+		function revAlert(){
+			alert('대출예약이 완료되었습니다.\n도서관 안내메일 수신후 대출이 가능합니다.')
+		}
+	</script>
 </head>
 <body>
 <c:import url="header.jsp"/>
@@ -34,6 +39,7 @@
                     </div>
                     <h2 class="page-title">신착도서</h2>
                 </div>
+                
                 <div class="search-box tac">
                     <form method="post" action="newbook.do" id="searchForm">
                         <div class="input-box">
@@ -53,7 +59,7 @@
                     <p class="total-text">전체 : ' <strong>${searchtext}</strong> ' 에 대한 검색결과입니다. (총 <em>${pgList.count }</em> 건)</p>
                 </div>
                
-                <div class="list-area">
+                <div class="list-area">	
                     <div class="utility-bar">
                         <div class="left">
                             <div class="check-item">
@@ -88,13 +94,12 @@
                     
                     <ul class="result-list">
                     <c:forEach var="book" items="${bookList}">
-                    
-                    <form method="post" action="revBookProc.do">
-                    	<input type="hidden" name="userID" value="${userID}">
-	                	<input type="hidden" name="bookID" value="${book.bookID}">
-                		<input type="hidden" name="bookName" value="${book.bookName}">
-                		<input type="hidden" name="bookWriter" value="${book.bookWriter}"> 
-                		
+                   	 	<form method="post" action="revBookProc.do" name="revBookForm" onsubmit="return revAlert()">
+	                	<input type="hidden" name="userID" value="${userID}">
+		                <input type="hidden" name="bookID" value="${book.bookID}">
+	                	<input type="hidden" name="bookName" value="${book.bookName}">
+	                	<input type="hidden" name="bookWriter" value="${book.bookWriter}">
+	                	
                         <li class="result-item">
                             <div class="check-item">
                                 <input type="checkbox" id="check93154380" value="93154380">
@@ -111,12 +116,33 @@
                                     <dd>ISBN: ${book.isbn} | 등록번호: ${book.bookID}</dd>
                                     <dd class="book-status">
                                         <div class="left">
-                                            자료상태: <span class="status available">${book.bookCheck}</span>
+                                            자료상태: <c:if test="${fn:contains(book.bookCheck,'가능')}">
+                                	<span class="status available">${book.bookCheck}</span>
+                                </c:if>
+                                <c:if test="${fn:contains(book.bookCheck,'불가')}">
+                                	<span class="status not-available">${book.bookCheck}</span>
+                                </c:if>
                                         </div>
                                         <div class="right">
-                                            <span class="btn loan-on">
-                                            	<input type="submit" value="대출예약" >
-                                            </span>
+                                            
+                                            	<c:if test="${empty userID}">
+                                            		<span class="btn loan-on">
+                                            			<a onclick="alert('로그인 후 이용가능합니다.')" href="login.do">대출예약</a>
+                                            		</span>
+												</c:if>
+												<c:if test="${!empty userID}">
+												<c:if test="${fn:contains(book.bookCheck,'가능')}">
+													<span class="btn loan-on">
+														<input type="submit" value="대출예약">
+													</span>
+					                            </c:if>
+					                            <c:if test="${fn:contains(book.bookCheck,'불가')}">
+					                                <span class="btn loan-off">
+					                                	<input type="submit" disabled value="예약불가">
+					                                </span>
+					                            </c:if>
+					                            </c:if>
+                                            
                                             <span class="btn print">
                                                 <a href="#">위치출력</a>
                                             </span>
@@ -124,9 +150,8 @@
                                     </dd>
                                 </dl>
                             </div>
+                		</form>
                         </li>
-                        
-                        </form>
                      </c:forEach>   
                     </ul>
                     

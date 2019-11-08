@@ -292,4 +292,44 @@ public class BookDAO {
 		  		return pgList;
 		}
 		
+	// 도서예약후 대출예약불가처리
+	public void revBookUpdate(String id) {
+		try {
+			con = pool.getConnection();
+
+			sql = "update book set bookCheck=? where bookID=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "대출불가");
+			pstmt.setString(2, id);
+
+			int update = pstmt.executeUpdate();
+			System.out.println("대출예약불가처리(update)=>" + update);
+
+		} catch (Exception e) {
+			System.out.println("revBookUpdate() 실행 에러유발=>" + e);
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+	}
+
+	// 도서예약취소 후 대출예약가능처리
+	public void revBookCancel(String id) {
+		try {
+			con = pool.getConnection();
+
+			sql = "update book set bookCheck=? where bookID=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "대출가능");
+			pstmt.setString(2, id);
+
+			int cancel = pstmt.executeUpdate();
+			System.out.println("대출예약가능처리(update)=>" + cancel);
+
+		} catch (Exception e) {
+			System.out.println("revBookCancel() 실행 에러유발=>" + e);
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+	}
+	
 }

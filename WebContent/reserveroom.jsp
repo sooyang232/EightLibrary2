@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.Date" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -109,11 +109,9 @@
                                                 <th scope="row">시간</th>
                                                 <td>
                                                 	<fmt:formatDate value="${today}" pattern="hh:mm" var="time" />
-                                                	<%-- <c:set var="timePlus" value="<%=new Date(new Date().getTime() + 60*60*3*1000)%>" /> --%>
-                                                	<%-- <c:set var="timePlus" value="${today.getTime()+60*60*3*1000 }" />
-                                                	<fmt:parseDate var="timePlus" value="${timePlus}" pattern="hh:mm" />
-                                                	<fmt:formatDate value="${timePlus}" pattern="hh:mm" var="timeEnd" /> --%>
-                                                	${time}~(180분)
+                                                	<c:set var="time3" value="<%=new Date(new Date().getTime() + 60*60*3*1000)%>" />
+                                                	<fmt:formatDate value="${time3}" pattern="hh:mm" var="timeEnd" />
+                                                	${time}~${timeEnd}(180분)
                                                 </td>
                                             </tr>
                                             <tr>

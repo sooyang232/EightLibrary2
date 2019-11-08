@@ -98,7 +98,7 @@ public class RevDAO {
 			System.out.println("insert=>" + insert);
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("insertRev 에러 유발"+e);
+			System.out.println("insertRev() 에러 유발"+e);
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
@@ -118,7 +118,7 @@ public class RevDAO {
 			System.out.println("delete=>"+delete);
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("deleteRev에러유발"+e);
+			System.out.println("deleteRev() 에러유발"+e);
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}

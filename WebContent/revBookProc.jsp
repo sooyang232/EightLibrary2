@@ -2,5 +2,5 @@
     pageEncoding="UTF-8" import="java.util.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="userID" value="${sessionScope.idKey}" />
- <meta http-equiv="Refresh" content="0;url=mypage2.do?userID=${userID}">
+ <c:set var="userID" value="${sessionScope.idKey}" />
+ <meta http-equiv="Refresh" content="0;url=revlist.do?userID=${userID}">

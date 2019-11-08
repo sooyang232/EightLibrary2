@@ -99,10 +99,10 @@
 								</ul>
 							</li>								
 							<li>
-								<a href="mypage2.do?userID=${userID }">대출/예약/이력</a>
+								<a href="revlist.do?userID=${userID }">대출/예약/이력</a>
 								<ul>
 									<li><a href="mypage1.html">대출현황</a></li>
-									<li><a href="mypage2.do?userID=${userID }">예약현황</a></li>
+									<li><a href="revlist.do?userID=${userID }">예약현황</a></li>
 									<li><a href="mypage3.html">대출이력</a></li>
 								</ul>
 							</li>
