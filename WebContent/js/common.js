@@ -58,8 +58,11 @@
 		$(".seat-btn button").click(function(){
 			$(".seat-btn button").removeClass("selected");
 			$(this).addClass("selected");
-			$("#seatID").html("디지털 열람실 "+$(this).text());
+			$("#seatNum").html("디지털열람실 "+$(this).text());
+			$('input:hidden[name=seatID]').val($(this).text());
+			//$('input:hidden[name=seatID]').val($("#seatNum").text());
 		})
+		
 	});
 
 	function resizeLayout() {

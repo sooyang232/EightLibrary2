@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
+<c:set var="userID" value="${sessionScope.idKey}" />
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
@@ -52,28 +54,39 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="seat-list-num">1</td>
-                                <td class="seat-list-date">2019-11-06 (수) 09:00-12:00</td>
-                                <td class="seat-list-room">디지털열람실</td>
-                                <td class="seat-list-id">01</td>
-                                <td class="seat-list-status">
-                                    <span class="status available">예약완료</span><br>
-                                    <button type="button" class="btn loan-off" onclick="alert('예약취소 되었습니다.');">예약취소</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="seat-list-num">1</td>
-                                <td class="seat-list-date">2019-11-06 (수) 09:00-12:00</td>
-                                <td class="seat-list-room">디지털열람실</td>
-                                <td class="seat-list-id">01</td>
-                                <td class="seat-list-status">
-                                    <span class="status not-available">취소완료</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5">좌석 예약 내역이 없습니다.</td>
-                            </tr>
+                        	<c:set var="count" value="${count}" />
+                        	<c:set var="num" value="1"/>
+                        	<c:if test="${count==0 }">
+                        		<tr>
+	                                <td colspan="5">좌석 예약 내역이 없습니다.</td>
+	                            </tr>
+                        	</c:if>
+                        	<c:forEach var="room" items="${rooms}">
+                        		<tr>
+	                                <td class="seat-list-num">
+	                                	<c:out value="${num}" />
+         								<c:set var="num"  value="${num+1}" />
+	                                </td>
+	                                <td class="seat-list-date">${room.date_time}~${room.timeEnd }</td>
+	                                <td class="seat-list-room">${room.revSpace}</td>
+	                                <td class="seat-list-id">${room.seatID}</td>
+	                                <td class="seat-list-status">
+	                                    <c:if test="${fn:contains(room.revCheck,'예약')}">
+	                                    	<span class="status available">예약완료</span><br>
+	                                    	<button type="button" class="btn loan-off" 
+	                                    	onclick="if(confirm('예약좌석을 취소하시겠습니까?'))
+	                                		{document.location.href='roomDel.do?userID=${userID}&seatID=${room.seatID}'}">예약취소</button>
+	                                    	
+										</c:if> 
+										<c:if test="${fn:contains(room.revCheck,'취소')}">
+											<span class="status not-available">취소완료</span>
+										</c:if>
+									</td>
+	                            </tr>
+                        		
+                        	</c:forEach>
+	                            
+	                            
                         </tbody>
                     </table>
                     <div class="pagination tac">

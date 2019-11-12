@@ -2,13 +2,13 @@ package db;
 
 public class SeatDTO {
 
-	private int seatID;
+	private String seatID;
 	private String rev_roomCheck;
 	
-	public int getSeatID() {
+	public String getSeatID() {
 		return seatID;
 	}
-	public void setSeatID(int seatID) {
+	public void setSeatID(String seatID) {
 		this.seatID = seatID;
 	}
 	public String getRev_roomCheck() {

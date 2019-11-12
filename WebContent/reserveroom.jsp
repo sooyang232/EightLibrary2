@@ -2,7 +2,9 @@
     pageEncoding="UTF-8" import="java.util.Date" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
+<c:set var="userID" value="${sessionScope.idKey}" />
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
@@ -34,7 +36,7 @@
 				</div>
                 
                 <div class="reserve-seat-wrap">
-                    <form action="reserveroomstatus.jsp">
+                    <form action="reserveroomstatus.do?userID=${userID }">
                         <div class="legend-box">
                             <ul>
                                 <li class="type1">이용중</li>
@@ -43,46 +45,15 @@
                         </div>
                         <div class="seat-btn">
                             <ul>
-                                <li class="type1" title="이용중"><button type="button" disabled="">01</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">02</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">03</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">04</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">05</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">06</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">07</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">08</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">09</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">10</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">11</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">12</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">13</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">14</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">15</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">16</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">17</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">18</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">19</button></li>
-                                <li class="type1" title="이용중"><button type="button" disabled="">20</button></li>
-                                <li class="type2" title="예약가능"><button type="button">21</button></li>
-                                <li class="type2" title="예약가능"><button type="button">22</button></li>
-                                <li class="type2" title="예약가능"><button type="button">23</button></li>
-                                <li class="type2" title="예약가능"><button type="button">24</button></li>
-                                <li class="type2" title="예약가능"><button type="button">25</button></li>
-                                <li class="type2" title="예약가능"><button type="button">26</button></li>
-                                <li class="type2" title="예약가능"><button type="button">27</button></li>
-                                <li class="type2" title="예약가능"><button type="button">28</button></li>
-                                <li class="type2" title="예약가능"><button type="button">29</button></li>
-                                <li class="type2" title="예약가능"><button type="button">30</button></li>
-                                <li class="type2" title="예약가능"><button type="button">31</button></li>
-                                <li class="type2" title="예약가능"><button type="button">32</button></li>
-                                <li class="type2" title="예약가능"><button type="button">33</button></li>
-                                <li class="type2" title="예약가능"><button type="button">34</button></li>
-                                <li class="type2" title="예약가능"><button type="button">35</button></li>
-                                <li class="type2" title="예약가능"><button type="button">36</button></li>
-                                <li class="type2" title="예약가능"><button type="button">37</button></li>
-                                <li class="type2" title="예약가능"><button type="button">38</button></li>
-                                <li class="type2" title="예약가능"><button type="button">39</button></li>
-                                <li class="type2" title="예약가능"><button type="button">40</button></li>
+                            	<c:forEach var="seat" items="${seats}">
+                            		<c:if test="${fn:contains(seat.rev_roomCheck,'이용중')}">
+                            			<li class="type1" title="이용중"><button type="button" disabled="">${seat.seatID}</button></li>
+                            		</c:if>
+                            		<c:if test="${fn:contains(seat.rev_roomCheck,'예약가능')}">
+                            			<li class="type2" title="예약가능"><button type="button" id="seat" onclick="getSeatID();">${seat.seatID}</button></li>
+                            		</c:if>
+                            	</c:forEach>
+                                
                             </ul>
                         </div>
                         <div class="ls_pop">
@@ -102,6 +73,7 @@
                                                 <td>
                                                 	<jsp:useBean id="today" class="java.util.Date"/>
                                                 	<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" var="date" />
+                                                	<fmt:formatDate value="${today}" pattern="yyyy-MM-dd hh:mm" var="date_time" />
                                                 	${date}
                                                 </td>
                                             </tr>
@@ -116,7 +88,7 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">좌석번호</th>
-                                                <td id="seatID">디지털 열람실 </td>
+                                                <td id="seatNum">디지털열람실 </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -133,6 +105,13 @@
                             </div>
                         </div>
 
+						<!-- 회원번호 --><input type="hidden" name="userID" value="${userID}">
+						<!-- 좌석번호 --><input type="hidden" name="seatID" >
+		                <!-- 예약일시 --><input type="hidden" name="date_time" value="${date_time}">
+		                <!-- 예약만기 --><input type="hidden" name="timeEnd" value="${timeEnd}">
+						<!-- 예약공간 --><input type="hidden" name="revSpace" value="디지털열람실">
+						<!-- 예약상태 --><input type="hidden" name="revCheck" value="예약완료">
+						
                         <div class="seat_submit">
                             <input type="submit" class="btn lg deep-blue" value="예약완료">
                         </div> 
