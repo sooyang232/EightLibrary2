@@ -7,6 +7,11 @@ Web Server : ApacheTomcat 8.5
 DB: MariaDB 5.5.60  
 Language : Java1.8,JSP2.3,jQuery3.4
 
+## 실행방법
+  1. java1.8 설치, eclipse설치, tomcat8.5설치
+  2. 메일발송을 위한 mail-1.4.7.jar 라이브러리 필요
+  3. EightLibrary2 > WebContent > index.jsp 에서 Run
+  
 ## 구현기능
 + 회원가입/로그인/로그아웃
     + 회원가입시 회원에게 이메일 발송
